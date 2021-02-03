@@ -14,8 +14,6 @@ import pytorch_tools.segmentation_models as pt_sm
 import effdet
 import timm
 
-sys.path.append("/home/zakirov/repoz/GPU-Efficient-Networks/")
-import GENet
 
 
 class AverageMeter:
@@ -137,12 +135,12 @@ if __name__ == "__main__":
     # all models are first init to cpu memory to find errors earlier
     # fmt: off
     models_dict = {
-        "EffDet0 My": pt.detection_models.efficientdet_d0(match_tf_same_padding=False, pretrained=None),
-        "EffDet0 My Wrapped": DetectionTrainWrapper(
-            modell=pt.detection_models.efficientdet_d0(match_tf_same_padding=False, pretrained=None),
-            size=args.sz,
-        ),
-        "R50": pt.models.resnet50(),
+        # "EffDet0 My": pt.detection_models.efficientdet_d0(match_tf_same_padding=False, pretrained=None),
+        # "EffDet0 My Wrapped": DetectionTrainWrapper(
+            # modell=pt.detection_models.efficientdet_d0(match_tf_same_padding=False, pretrained=None),
+            # size=args.sz,
+        # ),
+        # "R50": pt.models.resnet50(),
         # "Simp_R50": pt.models.simpl_resnet50(),
         "R34": pt.models.resnet34(),
         # "R34 est": pt.models.resnet34(norm_layer="estimated_abn"),
@@ -235,7 +233,9 @@ if __name__ == "__main__":
         #         "head_norm_act": "swish_hard",
         #     }
         # )
-        # "Eff B0": pt.models.efficientnet_b0(),
+        "Eff B0": pt.models.efficientnet_b0(),
+        "EfficientNet B3": pt.models.efficientnet_b3(pretrained=None),
+        "EfficientNet B5": pt.models.efficientnet_b5(pretrained=None),
         # "TR50": pt.models.tresnetm(norm_layer="abn"),
         # "D53 timm": timm.models.darknet53(),
         # "CSPD53 timm": timm.models.cspdarknet53(),
@@ -244,7 +244,7 @@ if __name__ == "__main__":
         # "CSPX50 timm": timm.models.cspresnext50(),
         # "TRes ": pt.models.tresnetm(),
         # "R50": pt.models.resnet50(),
-        # "ResNet50": pt.models.resnet50(),
+        "ResNet50": pt.models.resnet50(),
     }
     # fmt: on
     segm_models_dict = {
